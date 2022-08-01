@@ -13,10 +13,19 @@ body {
   crossorigin="anonymous">
 </script>
 <script src="./pong.js"></script>
+<script>
+$(function(){
+    // search for existing div with id "game"
+    const gameContainer = $('#game')
+    // then pass it to Pong.setupGame() as the container
+    Pong.setupGame(gameContainer)
+})
+</script>
 
 </head>
 <body>
   
   <div id="game"></div>
+
 </body>
 </html>
