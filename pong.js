@@ -28,7 +28,6 @@ const Pong ={
         x : 100,
         y : 100
     },
-    garbageCollection: {},
 
 
     setupGame : function(containerElement){
@@ -65,16 +64,12 @@ const Pong ={
     nextBallMove: function(){
         const z = this
 
-        // Delete any existing timeouts just in case
-        // There will be a better place to put this later. Example: When a new round ends or starts
-        //clearTimeout(z.garbageCollection.ballTimeout)
-
         // Move the ball one increment
         z.calculateNextBallPosition()
         z.refreshBallPositionOnScreen()
 
         // wait some time and then start all over again
-        z.garbageCollection.ballTimeout = setTimeout(function(){
+        setTimeout(function(){
             z.nextBallMove()
         }, z.config.intervalSpeed)
     },
