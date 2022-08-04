@@ -31,9 +31,9 @@ const Pong ={
     garbageCollection: {},
 
 
-    setupGame : function(containterElement){
+    setupGame : function(containerElement){
         const z = this
-        z.gamediv = containterElement;
+        z.gamediv = containerElement;
 
         // set game styles
         z.gamediv.css(z.config.gameStyle)
