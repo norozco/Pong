@@ -1,7 +1,14 @@
 # Pong!
 
 Author: Nasser
-Simplify the ball position into 2 if's instead of 4
+## notes
+
+
+
+
+
+### Simplify the ball position into 2 if's instead of 4
+```
     calculateNextBallPosition : function(){
         const z = this
         z.ballPos.x += z.ballSpeed.x;
@@ -23,4 +30,4 @@ Simplify the ball position into 2 if's instead of 4
             z.ballSpeed.y *= -1
         }
     },
-
+```
