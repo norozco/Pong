@@ -31,3 +31,10 @@ Author: Nasser
         }
     },
 ```
+### What to look at if it lags
+1. Play with the intervalSPeed
+2. Clear out unecessary console logs
+3. Optimize the calculate ball position
+
+### TO DO 
+1. Making the stage responsive
