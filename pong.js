@@ -40,7 +40,14 @@ const Pong ={
 
         // set game styles
         z.gamediv.css(z.config.gameStyle)
+        z.createStage()
+        z.createBall()
+        // Start ball movement
+        z.startBallMove()
+    },
 
+    createStage : function(){
+        const z = this
         // create brand new div for stage
         z.stage = $ ("<div></div>") 
         z.stage.width(z.config.stageDimensions.width)
@@ -49,7 +56,11 @@ const Pong ={
         z.stage.css(z.config.stageStyle)
         // add stage to game
         z.gamediv.append(z.stage)
-    
+
+    },
+
+    createBall : function(){
+        const z= this
         // create brand new ball
         z.ball = $ ("<img src=\"./Ball.svg\" />")
         z.ball.width(z.config.ballDimensions.width)
@@ -59,12 +70,13 @@ const Pong ={
         // add ball to stage
         z.stage.append(z.ball);
 
-
-
-        // Start ball movement
-        z.startBallMove()
     },
 
+    createPaddles : function(){
+
+
+
+    },
 
     startBallMove: function(){
          // This calls next ball move repeadeatly, in this case its better to use than setTimeout
