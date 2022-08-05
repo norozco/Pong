@@ -29,6 +29,7 @@ const Pong ={
         y : 100
     },
 
+    ballInterval : null,
 
     setupGame : function(containerElement){
         const z = this
@@ -58,7 +59,25 @@ const Pong ={
 
 
         // Start ball movement
-        z.nextBallMove() 
+        z.startBallMove()
+    },
+
+
+    startBallMove: function(){
+         // This calls next ball move repeadeatly, in this case its better to use than setTimeout
+        const z = this
+        z.ballInterval = setInterval(function(){
+            z.nextBallMove()
+            
+        }, z.config.intervalSpeed)
+
+    },
+
+    stopBallMove: function(){
+        const z = this
+
+        clearInterval(z.ballInterval)
+
     },
 
     nextBallMove: function(){
@@ -68,10 +87,6 @@ const Pong ={
         z.calculateNextBallPosition()
         z.refreshBallPositionOnScreen()
 
-        // wait some time and then start all over again
-        setTimeout(function(){
-            z.nextBallMove()
-        }, z.config.intervalSpeed)
     },
 
     calculateNextBallPosition : function(){
