@@ -21,12 +21,15 @@ const Pong ={
         ballStyle : {
             position : "absolute"
         }, 
-        intervalSpeed : 13, // Leave this alone unless there is lag
-        ballSpeed : 3 // This is obviously ball speed :D 
+        intervalSpeed : 13 // Leave this alone unless there is lag
     },
     ballPos : {
         x : 100,
         y : 100
+    },
+    ballSpeed :{
+        x: 3,
+        y: 1
     },
 
     ballInterval : null,
@@ -78,6 +81,7 @@ const Pong ={
 
         clearInterval(z.ballInterval)
 
+
     },
 
     nextBallMove: function(){
@@ -90,9 +94,35 @@ const Pong ={
     },
 
     calculateNextBallPosition : function(){
-        const z = this
-        z.ballPos.x = z.ballPos.x + z.config.ballSpeed;
-        z.ballPos.y = z.ballPos.y + z.config.ballSpeed;
+        const z = this 
+        z.ballPos.x += z.ballSpeed.x // += add to myself
+        z.ballPos.y += z.ballSpeed.y
+        //check if ball is about to hit the right wall
+        if (z.ballPos.x > z.config.stageDimensions.width - z.config.ballDimensions.width){
+            //reverse x direction
+            z.ballSpeed.x *= -1 // *= Multyplying myself
+        
+        }
+         //check if ball is about to hit the left wall  
+        if (z.ballPos.x < 0){
+            //reverse x direction
+            z.ballSpeed.x *= -1 // *= Multyplying myself
+        
+
+        }
+        // check if ball is about to hit the bottom 
+        if (z.ballPos.y > z.config.stageDimensions.height - z.config.ballDimensions.height){
+            //reverse y direction
+            z.ballSpeed.y *= -1 // *= Multyplying myself
+         
+
+        }
+        if (z.ballPos.y < 0){
+           //reverse y direction
+            z.ballSpeed.y *= -1 // *= Multyplying myself
+           
+
+        }
     },
 
     refreshBallPositionOnScreen : function(){
@@ -117,10 +147,10 @@ function addnumbers(number1,number2){
 
 console.log('Hi its me')
 console.log(addnumbers (6,25))
-
-
-
-
+let speed= 5 
+console.log('hi speed=', speed)
+speed *= -2
+console.log('new speed', speed)
 
 
 
