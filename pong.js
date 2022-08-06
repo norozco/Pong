@@ -1,8 +1,8 @@
 const Pong ={
     config :{
         ballDimensions : {
-            width : 20, 
-            height : 20 
+            width : 200, 
+            height : 100 
         },
         stageDimensions : {
             width : 1500, 
@@ -107,7 +107,7 @@ const Pong ={
     createBall : function(){
         const z= this
         // create brand new ball
-        z.ball = $ ("<img src=\"./Ball.svg\" />")
+        z.ball = $ ("<img src=\"./dvd.png\" />")
         z.ball.width(z.config.ballDimensions.width)
         z.ball.height(z.config.ballDimensions.height)
         // set ball styles
