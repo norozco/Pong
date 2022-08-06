@@ -37,7 +37,14 @@ const Pong ={
         paddleTwoPosition :{
             right: "10px"
 
-        }
+        },
+
+        paddingOneInitialSpeed: {
+        	y: 3
+        },
+        paddingTwoInitialSpeed: {
+        	y: 3
+        },
 
     },
     ballPos : {
@@ -59,11 +66,11 @@ const Pong ={
     },
 
     paddleOneSpeed :{
-        y: 3
+        y: 0
     },
     
     paddleTwoSpeed :{
-        y: 3
+        y: 0
     },
 
     ballInterval : null,
@@ -215,29 +222,43 @@ const Pong ={
     
     },
     
+    /**
+    	TO DO:
+    		Set up interval that actually moves the paddle
+    		(Cuz the code below is only setting where it SHOULD be moving,
+    		not where it actually is)
+    */
     paddleControls :function(){
         console.log("paddle Controls Not Working")
         const z = this
-        //Setup paddle one controls
-        //listen to any keypress in the browser
+        // Setup paddle one controls
+
+        // If key up or down is pressed
+        // Note: keypress might make more sense, research later
         $ (window).keydown(function(event){
             //alert(event.which)
             //s=83 w=87 (on keyboard)
+
             //if you press up 
              if (event.which == 87){
-            //move paddle one up
-                z.paddleOne.css({
-                    top: ""
-                })
+             		// Set velocity to UP
+            		z.paddleOneSpeed.y = -1 * z.config.paddingOneInitialSpeed
              }
         
             if (event.which == 83){
-                z.paddleOne.css({
-                    top: "50px"
-                })
-
+            	  // Set velocity to DOWN
+                z.paddleOneSpeed.y = z.config.paddingOneInitialSpeed
             }  
         })
+
+        // If either up or down key is let go
+        $ (window).keyup(function(event){
+        	// Set Y movement to 0
+             if (event.which == 87 || event.which == 83){
+            		z.paddleOneSpeed.y = 0
+             }
+        })
+
 
 
     }
