@@ -21,15 +21,49 @@ const Pong ={
         ballStyle : {
             position : "absolute"
         }, 
-        intervalSpeed : 13 // Leave this alone unless there is lag
+        intervalSpeed : 13, // Leave this alone unless there is lag
+
+        paddleStyle :{
+            background : "white",
+            width: "7px",
+            height: "200px",
+            position: "absolute"
+        },
+
+        paddleOnePosition :{
+            left: "10px"
+        },
+
+        paddleTwoPosition :{
+            right: "10px"
+
+        }
+
     },
     ballPos : {
         x : 100,
         y : 100
     },
+
     ballSpeed :{
         x: 3,
         y: 1
+    },
+    paddleOnePosition :{
+        y: 0
+
+    },
+    
+    paddleTwoPosition :{
+        y: 0
+    },
+
+    paddleOneSpeed :{
+        y: 3
+    },
+    
+    paddleTwoSpeed :{
+        y: 3
     },
 
     ballInterval : null,
@@ -41,9 +75,13 @@ const Pong ={
         // set game styles
         z.gamediv.css(z.config.gameStyle)
         z.createStage()
+        z.createPaddleOne()
+        z.createPaddleTwo()
         z.createBall()
+        z.paddleControls()
         // Start ball movement
         z.startBallMove()
+        
     },
 
     createStage : function(){
@@ -72,10 +110,29 @@ const Pong ={
 
     },
 
-    createPaddles : function(){
+    createPaddleOne : function(){
+        const z = this
+        // create paddle
+        z.paddleOne = $ ("<div></div>")
+        // assigning styles to the file
+        z.paddleOne.css(z.config.paddleStyle)
+        // add paddle to stage
+        z.paddleOne.css(z.config.paddleOnePosition)
+        z.stage.append(z.paddleOne);
+        console.log ('help')
+    },
 
+    createPaddleTwo : function(){
+        const z = this
+        // create paddle
+        z.paddleTwo = $ ("<div></div>")
+        // assigning styles to the file
+        z.paddleTwo.css(z.config.paddleStyle)
+        // add paddle to stage
+        z.paddleTwo.css(z.config.paddleTwoPosition)
+        z.stage.append(z.paddleTwo);
 
-
+        console.log ('help')
     },
 
     startBallMove: function(){
@@ -143,6 +200,46 @@ const Pong ={
             left : z.ballPos.x + "px",
             top : z.ballPos.y + "px" 
         })
+    },
+
+    calculateNextPaddleOnePosition : function(){
+        const z = this
+        z.paddleOnePosition.y += z.paddleOneSpeed.y
+    },
+
+    refreshPaddlePositionOnScreen : function(){
+        const z = this
+        z.paddleOne.css({
+            top : z.paddleOne.y + "px" 
+        })
+    
+    },
+    
+    paddleControls :function(){
+        console.log("paddle Controls Not Working")
+        const z = this
+        //Setup paddle one controls
+        //listen to any keypress in the browser
+        $ (window).keydown(function(event){
+            //alert(event.which)
+            //s=83 w=87 (on keyboard)
+            //if you press up 
+             if (event.which == 87){
+            //move paddle one up
+                z.paddleOne.css({
+                    top: ""
+                })
+             }
+        
+            if (event.which == 83){
+                z.paddleOne.css({
+                    top: "50px"
+                })
+
+            }  
+        })
+
+
     }
 
 }
