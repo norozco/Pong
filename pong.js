@@ -16,7 +16,6 @@ const Pong = {
             background: "black",
             padding: "100px",
             height: "100vh"
-
         },
         ballStyle: {
             position: "absolute"
@@ -25,9 +24,11 @@ const Pong = {
 
         paddleStyle: {
             background: "white",
-            width: "7px",
-            height: "200px",
             position: "absolute"
+        },
+        paddleDimensions: {
+            width: 7,
+            height: 200
         },
 
         paddleOnePosition: {
@@ -39,10 +40,10 @@ const Pong = {
 
         },
 
-        paddingOneInitialSpeed: {
+        paddingOnePressingSpeed: {
             y: 3
         },
-        paddingTwoInitialSpeed: {
+        paddingTwoPressingSpeed: {
             y: 3
         },
 
@@ -58,7 +59,7 @@ const Pong = {
         y: 1
     },
     paddleOnePosition: {
-        y: 0
+        y: 50
 
     },
 
@@ -67,11 +68,11 @@ const Pong = {
     },
 
     paddleOneSpeed: {
-        y: 5
+        y: 0
     },
 
     paddleTwoSpeed: {
-        y: 5
+        y: 0
     },
 
     ballInterval: null,
@@ -126,6 +127,8 @@ const Pong = {
         z.paddleOne.css(z.config.paddleStyle)
         // add paddle to stage
         z.paddleOne.css(z.config.paddleOnePosition)
+        z.paddleOne.width(z.config.paddleDimensions.width)
+        z.paddleOne.height(z.config.paddleDimensions.height)
         z.stage.append(z.paddleOne);
         console.log('help')
     },
@@ -138,6 +141,8 @@ const Pong = {
         z.paddleTwo.css(z.config.paddleStyle)
         // add paddle to stage
         z.paddleTwo.css(z.config.paddleTwoPosition)
+        z.paddleTwo.width(z.config.paddleDimensions.width)
+        z.paddleTwo.height(z.config.paddleDimensions.height)
         z.stage.append(z.paddleTwo);
 
         console.log('help')
@@ -148,9 +153,18 @@ const Pong = {
         const z = this
         z.ballInterval = setInterval(function () {
             z.nextBallMove()
+            z.nextPaddleMove()
 
         }, z.config.intervalSpeed)
 
+    },
+    
+    nextPaddleMove: function () {
+        const z = this
+        z.calculateNextPaddleOnePosition()
+        z.refreshPaddleOnePositionOnScreen()
+        z.calculateNextPaddleTwoPosition()
+        z.refreshPaddleTwoPositionOnScreen()
     },
 
     stopBallMove: function () {
@@ -212,13 +226,15 @@ const Pong = {
 
     calculateNextPaddleOnePosition: function (direction) {
         const z = this
-        if (direction == "down") {
-            z.paddleOnePosition.y += z.paddleOneSpeed.y
-        } else {
-            z.paddleOnePosition.y += -z.paddleOneSpeed.y
-        }
-
-        console.log(direction)
+        const nextPosition = z.paddleOnePosition.y + z.paddleOneSpeed.y
+            //top of paddle hits top wall
+        const paddleHitsTopWall = nextPosition < 0
+        const paddleHitsBottomWall = nextPosition > z.config.stageDimensions.height - z.config.paddleDimensions.height
+            if(paddleHitsTopWall || paddleHitsBottomWall){
+                //do nothing
+                    return 
+            } 
+            z.paddleOnePosition.y = nextPosition
     },
 
     refreshPaddleOnePositionOnScreen: function () {
@@ -228,15 +244,17 @@ const Pong = {
         })
     },
 
-    calculateNextPaddleTwoPosition: function (direction) {
+    calculateNextPaddleTwoPosition: function () {
         const z = this
-        if (direction == "down") {
-            z.paddleTwoPosition.y += z.paddleTwoSpeed.y
-        } else {
-            z.paddleTwoPosition.y += -z.paddleTwoSpeed.y
-        }
-
-        console.log(direction)
+        const nextPosition = z.paddleTwoPosition.y + z.paddleTwoSpeed.y
+        //top of paddle hits top wall
+    const paddleHitsTopWall = nextPosition < 0
+    const paddleHitsBottomWall = nextPosition > z.config.stageDimensions.height - z.config.paddleDimensions.height
+        if(paddleHitsTopWall || paddleHitsBottomWall){
+            //do nothing
+                return 
+        } 
+        z.paddleTwoPosition.y = nextPosition
     },
 
     refreshPaddleTwoPositionOnScreen: function () {
@@ -265,35 +283,35 @@ const Pong = {
             //if you press up 
             if (event.which == 87) {
                 // Set velocity to UP
-                //z.paddleOneSpeed.y = -1 * z.config.paddingOneInitialSpeed
-                z.calculateNextPaddleOnePosition("up")
-                z.refreshPaddleOnePositionOnScreen()
-
+                z.paddleOneSpeed.y = -1 * z.config.paddingOnePressingSpeed.y
+                //z.calculateNextPaddleOnePosition("up")
+                //z.refreshPaddleOnePositionOnScreen()
+                console.log("speeeed" , z.paddleOneSpeed.y, z.config.paddingOnePressingSpeed.y)
             }
             //If you press down
             if (event.which == 83) {
                 // Set velocity to DOWN
-                //z.paddleOneSpeed.y = z.config.paddingOneInitialSpeed
-                z.calculateNextPaddleOnePosition("down")
-                z.refreshPaddleOnePositionOnScreen()
+                z.paddleOneSpeed.y = z.config.paddingOnePressingSpeed.y
+                //z.calculateNextPaddleOnePosition("down")
+                //z.refreshPaddleOnePositionOnScreen()
             }
 
             if (event.which == 38) {
                 // Set velocity to UP
-                //z.paddleOneSpeed.y = -1 * z.config.paddingOneInitialSpeed
+                z.paddleTwoSpeed.y = -1 * z.config.paddingTwoPressingSpeed.y
                 event.preventDefault()
-                z.calculateNextPaddleTwoPosition("up")
-                z.refreshPaddleTwoPositionOnScreen()
+                //z.calculateNextPaddleTwoPosition("up")
+               // z.refreshPaddleTwoPositionOnScreen()
 
                 console.log("pressing up")
             }
             //If you press down
             if (event.which == 40) {
                 // Set velocity to DOWN
-                //z.paddleOneSpeed.y = z.config.paddingOneInitialSpeed
+                z.paddleTwoSpeed.y = z.config.paddingTwoPressingSpeed.y
                 event.preventDefault()
-                z.calculateNextPaddleTwoPosition("down")
-                z.refreshPaddleTwoPositionOnScreen()
+                //z.calculateNextPaddleTwoPosition("down")
+                //z.refreshPaddleTwoPositionOnScreen()
                 console.log("pressing down")
             }
 
@@ -304,8 +322,12 @@ const Pong = {
         $(window).keyup(function (event) {
             // Set Y movement to 0
             if (event.which == 87 || event.which == 83) {
-                //z.paddleOneSpeed.y = 0
+                z.paddleOneSpeed.y = 0
             }
+            if (event.which == 38 || event.which == 40) {
+                z.paddleTwoSpeed.y = 0
+            }
+
         })
 
 
