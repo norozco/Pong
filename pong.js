@@ -66,7 +66,7 @@ const Pong ={
     },
 
     paddleOneSpeed :{
-        y: 0
+        y: 5
     },
     
     paddleTwoSpeed :{
@@ -209,17 +209,22 @@ const Pong ={
         })
     },
 
-    calculateNextPaddleOnePosition : function(){
+    calculateNextPaddleOnePosition : function(direction){
         const z = this
-        z.paddleOnePosition.y += z.paddleOneSpeed.y
+            if(direction == "down"){
+                z.paddleOnePosition.y += z.paddleOneSpeed.y
+            } else{
+                z.paddleOnePosition.y += -z.paddleOneSpeed.y
+            }
+            
+        console.log(direction)
     },
 
     refreshPaddlePositionOnScreen : function(){
         const z = this
         z.paddleOne.css({
-            top : z.paddleOne.y + "px" 
+            top : z.paddleOnePosition.y + "px" 
         })
-    
     },
     
     /**
@@ -242,20 +247,26 @@ const Pong ={
             //if you press up 
              if (event.which == 87){
              		// Set velocity to UP
-            		z.paddleOneSpeed.y = -1 * z.config.paddingOneInitialSpeed
+            		//z.paddleOneSpeed.y = -1 * z.config.paddingOneInitialSpeed
+                z.calculateNextPaddleOnePosition("up")
+                z.refreshPaddlePositionOnScreen()
+                console.log( )
              }
-        
+        //If you press down
             if (event.which == 83){
             	  // Set velocity to DOWN
-                z.paddleOneSpeed.y = z.config.paddingOneInitialSpeed
+                //z.paddleOneSpeed.y = z.config.paddingOneInitialSpeed
+                z.calculateNextPaddleOnePosition("down")
+                z.refreshPaddlePositionOnScreen()
             }  
+
         })
 
         // If either up or down key is let go
         $ (window).keyup(function(event){
         	// Set Y movement to 0
              if (event.which == 87 || event.which == 83){
-            		z.paddleOneSpeed.y = 0
+            		//z.paddleOneSpeed.y = 0
              }
         })
 
