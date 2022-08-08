@@ -37,4 +37,9 @@ Author: Nasser
 3. Optimize the calculate ball position
 
 ### TO DO 
-1. Making the stage responsive
+1. Fix the paddles switching direction lag
+2. Make the ball bounce off the paddles
+3. Start the paddles in the middle of the screen
+4. Start the ball at a random angle and center of screen
+5. Setup scores and rounds 
+6. Increase the ball speed every round
