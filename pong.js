@@ -162,7 +162,7 @@ const Pong = {
         }, z.config.intervalSpeed)
 
     },
-    
+
     nextPaddleMove: function () {
         const z = this
         z.calculateNextPaddleOnePosition()
@@ -217,6 +217,15 @@ const Pong = {
             z.ballSpeed.y *= -1 // *= Multyplying myself
         }
     },
+   // bouncingOffPaddle: function () {
+        //const z = this
+        //z.ballPos.x += z.ballSpeed.x // += add to myself
+       //z.ballPos.y += z.ballSpeed.y
+        //make ball bounce off of paddle 2
+        //if (z.ballPos.x > z.config.paddleTwoDimensions.width -z.config.ballDimensions)
+       // z.ballSpeed.x *= -1
+        //console.log(z.bouncingOffPaddle.x)
+//},
 
     refreshBallPositionOnScreen: function () {
         const z = this
@@ -225,18 +234,19 @@ const Pong = {
             top: z.ballPos.y + "px"
         })
     },
+    
 
     calculateNextPaddleOnePosition: function (direction) {
         const z = this
         const nextPosition = z.paddleOnePosition.y + z.paddleOneSpeed.y
-            //top of paddle hits top wall
+        //top of paddle hits top wall
         const paddleHitsTopWall = nextPosition < 0
         const paddleHitsBottomWall = nextPosition > z.config.stageDimensions.height - z.config.paddleOneDimensions.height
-            if(paddleHitsTopWall || paddleHitsBottomWall){
-                //do nothing
-                    return 
-            } 
-            z.paddleOnePosition.y = nextPosition
+        if (paddleHitsTopWall || paddleHitsBottomWall) {
+            //do nothing
+            return
+        }
+        z.paddleOnePosition.y = nextPosition
     },
 
     refreshPaddleOnePositionOnScreen: function () {
@@ -250,12 +260,12 @@ const Pong = {
         const z = this
         const nextPosition = z.paddleTwoPosition.y + z.paddleTwoSpeed.y
         //top of paddle hits top wall
-    const paddleHitsTopWall = nextPosition < 0
-    const paddleHitsBottomWall = nextPosition > z.config.stageDimensions.height - z.config.paddleTwoDimensions.height
-        if(paddleHitsTopWall || paddleHitsBottomWall){
+        const paddleHitsTopWall = nextPosition < 0
+        const paddleHitsBottomWall = nextPosition > z.config.stageDimensions.height - z.config.paddleTwoDimensions.height
+        if (paddleHitsTopWall || paddleHitsBottomWall) {
             //do nothing
-                return 
-        } 
+            return
+        }
         z.paddleTwoPosition.y = nextPosition
     },
 
@@ -281,14 +291,14 @@ const Pong = {
         $(window).keydown(function (event) {
             //alert(event.which)
             //s=83 w=87 (on keyboard)
-            console.log(event.which)
+            
             //if you press up 
             if (event.which == 87) {
                 // Set velocity to UP
                 z.paddleOneSpeed.y = -1 * z.config.paddingOnePressingSpeed.y
                 //z.calculateNextPaddleOnePosition("up")
                 //z.refreshPaddleOnePositionOnScreen()
-                console.log("speeeed" , z.paddleOneSpeed.y, z.config.paddingOnePressingSpeed.y)
+                
             }
             //If you press down
             if (event.which == 83) {
@@ -303,9 +313,9 @@ const Pong = {
                 z.paddleTwoSpeed.y = -1 * z.config.paddingTwoPressingSpeed.y
                 event.preventDefault()
                 //z.calculateNextPaddleTwoPosition("up")
-               // z.refreshPaddleTwoPositionOnScreen()
+                // z.refreshPaddleTwoPositionOnScreen()
 
-                console.log("pressing up")
+                
             }
             //If you press down
             if (event.which == 40) {
@@ -314,9 +324,9 @@ const Pong = {
                 event.preventDefault()
                 //z.calculateNextPaddleTwoPosition("down")
                 //z.refreshPaddleTwoPositionOnScreen()
-                console.log("pressing down")
+               
             }
-        
+
 
         })
 
@@ -360,11 +370,3 @@ console.log('new speed', speed)
 
 
 
-//bouncingOffPaddle: function(){
-   // const z = this
-   // z.ballPos.x += z.ballSpeed.x // += add to myself
-   // z.ballPos.y += z.ballSpeed.y
-    //make ball bounce off of paddle 2 
-   // if (z.ballPos.x > z.config.paddle)
-
-//}
