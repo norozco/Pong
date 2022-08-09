@@ -287,9 +287,8 @@ const Pong = {
         //console.log(z.ballPos.y > z.paddleTwoPosition.y, z.ballPos.y < z.paddleTwoPosition.y, z.ballPos.y,  z.paddleTwoPosition.y)
 //console.log(z.ballPos.x > z.paddleTwoPosition.x - z.config.ballDimensions.width, z.ballPos.x, z.paddleTwoPosition.x, z.config.ballDimensions.width )
 
-
     },
-  
+  //
 
     refreshBallPositionOnScreen: function () {
         const z = this

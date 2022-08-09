@@ -38,8 +38,8 @@ Author: Nasser
 
 ### TO DO 
 1. Fix the paddles switching direction lag
-2. Make the ball bounce off the paddles
 3. Start the paddles in the middle of the screen
-4. Start the ball at a random angle and center of screen
-5. Setup scores and rounds 
+4. Start the ball at a random angle and center of screen (almost)
+5. Setup scores and rounds (almost)
 6. Increase the ball speed every round
+7. Consolidate end of round logic
