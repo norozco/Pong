@@ -14,7 +14,7 @@ const Pong = {
         },
         gameStyle: {
             background: "black",
-            padding: "100px",
+            paddle: "100px",
             height: "100vh"
         },
         ballStyle: {
@@ -45,13 +45,18 @@ const Pong = {
            y:100
         },
 
-        paddingOnePressingSpeed: {
+        paddleOnePressingSpeed: {
             y: 3
         },
-        paddingTwoPressingSpeed: {
+        paddleTwoPressingSpeed: {
             y: 3
         },
-
+        scoreStyle: {
+            color: "white",
+            fontSize: "100px",
+            fontFamily: "Garamond"
+        }
+        
     },
 
     ballPos: {
@@ -84,6 +89,8 @@ const Pong = {
 
     ballInterval: null,
 
+    score: [0,0],
+
     setupGame: function (containerElement) {
         const z = this
         z.gamediv = containerElement;
@@ -97,7 +104,7 @@ const Pong = {
         z.paddleControls()
         // Start ball movement
         z.startBallMove()
-
+        z.createScore()
     },
 
     createStage: function () {
@@ -146,7 +153,7 @@ const Pong = {
         const z = this
         // create paddle
         z.paddleTwo = $("<div></div>")
-        // assigning styles to the file
+        // assigning styles to the paddle
         z.paddleTwo.css(z.config.paddleStyle)
         // add paddle to stage
         z.paddleTwo.css({left:z.config.paddleTwoPosition.x +"px"})
@@ -158,6 +165,22 @@ const Pong = {
          z.paddleTwoPosition.y = z.config.paddleTwoPosition.y
 
         console.log('help')
+    },
+
+    createScore: function(){
+        const z = this
+        //create score
+        z.scoreOne = $ ("<div></div>")
+        z.scoreTwo = $ ("<div></div>")
+        //assign styles to the score one
+        z.scoreOne.css(z.config.scoreStyle)
+        z.scoreTwo.css(z.config.scoreStyle)
+        //add to the game
+        z.gamediv.append(z.scoreOne)
+        z.gamediv.append(z.scoreTwo)
+        //fill in initial scores
+        z.scoreOne.html(z.score[0])
+        z.scoreTwo.html(z.score[1])
     },
 
     startBallMove: function () {
@@ -309,7 +332,7 @@ const Pong = {
             //if you press up 
             if (event.which == 87) {
                 // Set velocity to UP
-                z.paddleOneSpeed.y = -1 * z.config.paddingOnePressingSpeed.y
+                z.paddleOneSpeed.y = -1 * z.config.paddleOnePressingSpeed.y
                 //z.calculateNextPaddleOnePosition("up")
                 //z.refreshPaddleOnePositionOnScreen()
                 
@@ -317,14 +340,14 @@ const Pong = {
             //If you press down
             if (event.which == 83) {
                 // Set velocity to DOWN
-                z.paddleOneSpeed.y = z.config.paddingOnePressingSpeed.y
+                z.paddleOneSpeed.y = z.config.paddleOnePressingSpeed.y
                 //z.calculateNextPaddleOnePosition("down")
                 //z.refreshPaddleOnePositionOnScreen()
             }
 
             if (event.which == 38) {
                 // Set velocity to UP
-                z.paddleTwoSpeed.y = -1 * z.config.paddingTwoPressingSpeed.y
+                z.paddleTwoSpeed.y = -1 * z.config.paddleTwoPressingSpeed.y
                 event.preventDefault()
                 //z.calculateNextPaddleTwoPosition("up")
                 // z.refreshPaddleTwoPositionOnScreen()
@@ -334,7 +357,7 @@ const Pong = {
             //If you press down
             if (event.which == 40) {
                 // Set velocity to DOWN
-                z.paddleTwoSpeed.y = z.config.paddingTwoPressingSpeed.y
+                z.paddleTwoSpeed.y = z.config.paddleTwoPressingSpeed.y
                 event.preventDefault()
                 //z.calculateNextPaddleTwoPosition("down")
                 //z.refreshPaddleTwoPositionOnScreen()
@@ -379,8 +402,8 @@ console.log('hi speed=', speed)
 speed *= -2
 console.log('new speed', speed)
 
-
-
-
-
-
+myArray = [1,2,3,4]
+myArrayTwo = [1,"dog", "cat"]
+console.log(myArrayTwo[1])
+myArrayTwo [1] = "dolphin"
+console.log(myArrayTwo[1])
