@@ -36,13 +36,13 @@ const Pong = {
         },
 
         paddleOnePosition: {
-            x:100,
-            y:100
+            x: 100,
+            y: 100
         },
 
         paddleTwoPosition: {
-           x:1400,
-           y:100
+            x: 1400,
+            y: 100
         },
 
         paddleOnePressingSpeed: {
@@ -56,7 +56,7 @@ const Pong = {
             fontSize: "100px",
             fontFamily: "Garamond"
         }
-        
+
     },
 
     ballPos: {
@@ -89,13 +89,13 @@ const Pong = {
 
     ballInterval: null,
 
-    score: [0,0],
+    score: [0, 0],
 
     keysPressed: {
-    	W: false,
-    	S: false,
-    	UP: false,
-    	DOWN: false
+        W: false,
+        S: false,
+        UP: false,
+        DOWN: false
     },
 
     setupGame: function (containerElement) {
@@ -148,7 +148,7 @@ const Pong = {
         // assigning styles to the file
         z.paddleOne.css(z.config.paddleStyle)
         // add paddle to stage
-        z.paddleOne.css({left:z.config.paddleOnePosition.x + "px"})
+        z.paddleOne.css({ left: z.config.paddleOnePosition.x + "px" })
         z.paddleOne.width(z.config.paddleOneDimensions.width)
         z.paddleOne.height(z.config.paddleOneDimensions.height)
         z.stage.append(z.paddleOne);
@@ -164,22 +164,22 @@ const Pong = {
         // assigning styles to the paddle
         z.paddleTwo.css(z.config.paddleStyle)
         // add paddle to stage
-        z.paddleTwo.css({left:z.config.paddleTwoPosition.x +"px"})
+        z.paddleTwo.css({ left: z.config.paddleTwoPosition.x + "px" })
         z.paddleTwo.width(z.config.paddleTwoDimensions.width)
         z.paddleTwo.height(z.config.paddleTwoDimensions.height)
         z.stage.append(z.paddleTwo);
-         //transfering the initial conditions to the current position
-         z.paddleTwoPosition.x = z.config.paddleTwoPosition.x
-         z.paddleTwoPosition.y = z.config.paddleTwoPosition.y
+        //transfering the initial conditions to the current position
+        z.paddleTwoPosition.x = z.config.paddleTwoPosition.x
+        z.paddleTwoPosition.y = z.config.paddleTwoPosition.y
 
         console.log('help')
     },
 
-    createScore: function(){
+    createScore: function () {
         const z = this
         //create score
-        z.scoreOne = $ ("<div></div>")
-        z.scoreTwo = $ ("<div></div>")
+        z.scoreOne = $("<div></div>")
+        z.scoreTwo = $("<div></div>")
         //assign styles to the score one
         z.scoreOne.css(z.config.scoreStyle)
         z.scoreTwo.css(z.config.scoreStyle)
@@ -218,7 +218,7 @@ const Pong = {
 
     },
 
-    restartRound: function(){
+    restartRound: function () {
         const z = this
         //reset the ball position
         z.resetBallPosition()
@@ -226,10 +226,10 @@ const Pong = {
         z.startAnimation()
     },
 
-    resetBallPosition: function(){
+    resetBallPosition: function () {
         const z = this
-        z.ballPos.x = z.config.stageDimensions.width/2
-        z.ballPos.y = z.config.stageDimensions.height/2
+        z.ballPos.x = z.config.stageDimensions.width / 2
+        z.ballPos.y = z.config.stageDimensions.height / 2
         //to do: pick a random angle
     },
 
@@ -251,7 +251,7 @@ const Pong = {
             //reverse x direction
             //z.ballSpeed.x *= -1 // *= Multyplying myself
             //when it hits the right wall 1:score incrases 
-            z.score[0] += 1 
+            z.score[0] += 1
             z.scoreOne.html(z.score[0])
             //2: stop the ball from moving
             z.stopAnimation()
@@ -281,21 +281,21 @@ const Pong = {
             //reverse y direction
             z.ballSpeed.y *= -1 // *= Multyplying myself
         }
-//cond 1: if ball goes to the right of paddle two, cond 2: if ball is below the top of the paddle cond 3: ball is above the bottom of the paddle
-        if (z.ballPos.x > z.paddleTwoPosition.x - z.config.ballDimensions.width && z.ballPos.y > z.paddleTwoPosition.y && z.ballPos.y < z.paddleTwoPosition.y + z.config.paddleTwoDimensions.height){
+        //cond 1: if ball goes to the right of paddle two, cond 2: if ball is below the top of the paddle cond 3: ball is above the bottom of the paddle
+        if (z.ballPos.x > z.paddleTwoPosition.x - z.config.ballDimensions.width && z.ballPos.y > z.paddleTwoPosition.y && z.ballPos.y < z.paddleTwoPosition.y + z.config.paddleTwoDimensions.height) {
             z.ballSpeed.x *= -1
             console.log("went past paddle :D")
         }
         //cond 1: if ball goes to the left of paddle one, cond 2: if ball is below the top of the paddle cond 3: ball is above the bottom of the paddle
-        if (z.ballPos.x < z.paddleOnePosition.x + z.config.paddleOneDimensions.width && z.ballPos.y > z.paddleOnePosition.y && z.ballPos.y < z.paddleOnePosition.y + z.config.paddleOneDimensions.height){
+        if (z.ballPos.x < z.paddleOnePosition.x + z.config.paddleOneDimensions.width && z.ballPos.y > z.paddleOnePosition.y && z.ballPos.y < z.paddleOnePosition.y + z.config.paddleOneDimensions.height) {
             z.ballSpeed.x *= -1
             console.log("went past paddle :D")
         }
         //console.log(z.ballPos.y > z.paddleTwoPosition.y, z.ballPos.y < z.paddleTwoPosition.y, z.ballPos.y,  z.paddleTwoPosition.y)
-//console.log(z.ballPos.x > z.paddleTwoPosition.x - z.config.ballDimensions.width, z.ballPos.x, z.paddleTwoPosition.x, z.config.ballDimensions.width )
+        //console.log(z.ballPos.x > z.paddleTwoPosition.x - z.config.ballDimensions.width, z.ballPos.x, z.paddleTwoPosition.x, z.config.ballDimensions.width )
 
     },
-  //
+    //
 
     refreshBallPositionOnScreen: function () {
         const z = this
@@ -304,7 +304,7 @@ const Pong = {
             top: z.ballPos.y + "px"
         })
     },
-    
+
 
     calculateNextPaddleOnePosition: function (direction) {
         const z = this
@@ -359,13 +359,13 @@ const Pong = {
         // If key up or down is pressed
         $(window).keydown(function (event) {
             //s=83 w=87 (on keyboard)
-            
+
             //if you press W key (up)
             if (event.which == 87) {
                 // Set velocity to UP
                 z.paddleOneSpeed.y = -1 * z.config.paddleOnePressingSpeed.y
                 z.keysPressed.W = true
-                
+
             }
             //If you press S key (down)
             if (event.which == 83) {
@@ -374,19 +374,21 @@ const Pong = {
                 z.keysPressed.S = true
             }
 
-						//If you press UP key
+            //If you press UP key
             if (event.which == 38) {
                 // Set velocity to UP
                 z.paddleTwoSpeed.y = -1 * z.config.paddleTwoPressingSpeed.y
                 event.preventDefault()
+                z.keysPressed.UP = true
             }
             //If you press DOWN key
             if (event.which == 40) {
                 // Set velocity to DOWN
                 z.paddleTwoSpeed.y = z.config.paddleTwoPressingSpeed.y
                 event.preventDefault()
+                z.keysPressed.DOWN = true
             }
-            
+
 
         })
 
@@ -402,19 +404,32 @@ const Pong = {
             }
             */
             if (event.which == 87 && !z.keysPressed.S) {
-            		z.paddleOneSpeed.y = 0
+                z.paddleOneSpeed.y = 0
             }
             if (event.which == 83 && !z.keysPressed.W) {
-            		z.paddleOneSpeed.y = 0
+                z.paddleOneSpeed.y = 0
             }
 
             if (event.which == 87) {
-							z.keysPressed.W = false
+                z.keysPressed.W = false
             }
             if (event.which == 83) {
-							z.keysPressed.S = false
+                z.keysPressed.S = false
             }
 
+            if (event.which == 38 && !z.keysPressed.DOWN) {
+                z.paddleOneSpeed.y = 0
+            }
+            if (event.which == 40 && !z.keysPressed.UP) {
+                z.paddleOneSpeed.y = 0
+            }
+
+            if (event.which == 38) {
+                z.keysPressed.UP= false
+            }
+            if (event.which == 40) {
+                z.keysPressed.DOWN = false
+            }
         })
 
 
@@ -439,8 +454,8 @@ console.log('hi speed=', speed)
 speed *= -2
 console.log('new speed', speed)
 
-myArray = [1,2,3,4]
-myArrayTwo = [1,"dog", "cat"]
+myArray = [1, 2, 3, 4]
+myArrayTwo = [1, "dog", "cat"]
 console.log(myArrayTwo[1])
-myArrayTwo [1] = "dolphin"
+myArrayTwo[1] = "dolphin"
 console.log(myArrayTwo[1])
