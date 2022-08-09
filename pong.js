@@ -148,13 +148,10 @@ const Pong = {
         // assigning styles to the file
         z.paddleOne.css(z.config.paddleStyle)
         // add paddle to stage
-        z.paddleOne.css({ left: z.config.paddleOnePosition.x + "px" })
+        z.resetPaddlePosition()
         z.paddleOne.width(z.config.paddleOneDimensions.width)
         z.paddleOne.height(z.config.paddleOneDimensions.height)
         z.stage.append(z.paddleOne);
-        //transfering the initial conditions to the current position
-        z.paddleOnePosition.x = z.config.paddleOnePosition.x
-        z.paddleOnePosition.y = z.config.paddleOnePosition.y
     },
 
     createPaddleTwo: function () {
@@ -164,14 +161,10 @@ const Pong = {
         // assigning styles to the paddle
         z.paddleTwo.css(z.config.paddleStyle)
         // add paddle to stage
-        z.paddleTwo.css({ left: z.config.paddleTwoPosition.x + "px" })
+        z.resetPaddlePosition()
         z.paddleTwo.width(z.config.paddleTwoDimensions.width)
         z.paddleTwo.height(z.config.paddleTwoDimensions.height)
         z.stage.append(z.paddleTwo);
-        //transfering the initial conditions to the current position
-        z.paddleTwoPosition.x = z.config.paddleTwoPosition.x
-        z.paddleTwoPosition.y = z.config.paddleTwoPosition.y
-
         console.log('help')
     },
 
@@ -222,20 +215,28 @@ const Pong = {
         const z = this
         //reset the ball position
         z.resetBallPosition()
+        z.resetPaddlePosition()
         //restart the animation
         z.startAnimation()
     },
 
     resetBallPosition: function () {
         const z = this
-        z.ballPos.x = z.config.stageDimensions.width / 2
-        z.ballPos.y = z.config.stageDimensions.height / 2
+        z.ballPos.x = (z.config.stageDimensions.width - z.config.ballDimensions.width) / 2
+        z.ballPos.y = (z.config.stageDimensions.height - z.config.ballDimensions.height) / 2
         //to do: pick a random angle
+    },
+
+    resetPaddlePosition: function(){
+        const z = this
+        z.paddleOnePosition.x = z.config.paddleOnePosition.x
+        z.paddleOnePosition.y = (z.config.stageDimensions.height - z.config.paddleOneDimensions.height) / 2
+        z.paddleTwoPosition.x = z.config.paddleTwoPosition.x
+        z.paddleTwoPosition.y = (z.config.stageDimensions.height - z.config.paddleTwoDimensions.height) / 2
     },
 
     nextBallMove: function () {
         const z = this
-
         // Move the ball one increment
         z.calculateNextBallPosition()
         z.refreshBallPositionOnScreen()
@@ -418,10 +419,10 @@ const Pong = {
             }
 
             if (event.which == 38 && !z.keysPressed.DOWN) {
-                z.paddleOneSpeed.y = 0
+                z.paddleTwoSpeed.y = 0
             }
             if (event.which == 40 && !z.keysPressed.UP) {
-                z.paddleOneSpeed.y = 0
+                z.paddleTwoSpeed.y = 0
             }
 
             if (event.which == 38) {
@@ -431,9 +432,6 @@ const Pong = {
                 z.keysPressed.DOWN = false
             }
         })
-
-
-
     }
 
 }

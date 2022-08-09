@@ -43,3 +43,4 @@ Author: Nasser
 5. Setup scores and rounds (almost)
 6. Increase the ball speed every round
 7. Consolidate end of round logic
+8. Fix the bouncing on the outside of the paddles and the stage
