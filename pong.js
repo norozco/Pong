@@ -1,8 +1,8 @@
 const Pong = {
     config: {
         ballDimensions: {
-            width: 200,
-            height: 100
+            width: 20,
+            height: 20
         },
         stageDimensions: {
             width: 1500,
@@ -26,11 +26,14 @@ const Pong = {
             background: "white",
             position: "absolute"
         },
-        paddleDimensions: {
+        paddleOneDimensions: {
             width: 7,
             height: 200
         },
-
+        paddleTwoDimensions: {
+            width: 7,
+            height: 200
+        },
         paddleOnePosition: {
             left: "10px"
         },
@@ -109,7 +112,7 @@ const Pong = {
     createBall: function () {
         const z = this
         // create brand new ball
-        z.ball = $("<img src=\"./dvd.png\" />")
+        z.ball = $("<img src=\"./Ball.svg\" />")
         z.ball.width(z.config.ballDimensions.width)
         z.ball.height(z.config.ballDimensions.height)
         // set ball styles
@@ -127,8 +130,8 @@ const Pong = {
         z.paddleOne.css(z.config.paddleStyle)
         // add paddle to stage
         z.paddleOne.css(z.config.paddleOnePosition)
-        z.paddleOne.width(z.config.paddleDimensions.width)
-        z.paddleOne.height(z.config.paddleDimensions.height)
+        z.paddleOne.width(z.config.paddleOneDimensions.width)
+        z.paddleOne.height(z.config.paddleOneDimensions.height)
         z.stage.append(z.paddleOne);
         console.log('help')
     },
@@ -141,8 +144,8 @@ const Pong = {
         z.paddleTwo.css(z.config.paddleStyle)
         // add paddle to stage
         z.paddleTwo.css(z.config.paddleTwoPosition)
-        z.paddleTwo.width(z.config.paddleDimensions.width)
-        z.paddleTwo.height(z.config.paddleDimensions.height)
+        z.paddleTwo.width(z.config.paddleTwoDimensions.width)
+        z.paddleTwo.height(z.config.paddleTwoDimensions.height)
         z.stage.append(z.paddleTwo);
 
         console.log('help')
@@ -229,7 +232,7 @@ const Pong = {
         const nextPosition = z.paddleOnePosition.y + z.paddleOneSpeed.y
             //top of paddle hits top wall
         const paddleHitsTopWall = nextPosition < 0
-        const paddleHitsBottomWall = nextPosition > z.config.stageDimensions.height - z.config.paddleDimensions.height
+        const paddleHitsBottomWall = nextPosition > z.config.stageDimensions.height - z.config.paddleOneDimensions.height
             if(paddleHitsTopWall || paddleHitsBottomWall){
                 //do nothing
                     return 
@@ -249,7 +252,7 @@ const Pong = {
         const nextPosition = z.paddleTwoPosition.y + z.paddleTwoSpeed.y
         //top of paddle hits top wall
     const paddleHitsTopWall = nextPosition < 0
-    const paddleHitsBottomWall = nextPosition > z.config.stageDimensions.height - z.config.paddleDimensions.height
+    const paddleHitsBottomWall = nextPosition > z.config.stageDimensions.height - z.config.paddleTwoDimensions.height
         if(paddleHitsTopWall || paddleHitsBottomWall){
             //do nothing
                 return 
