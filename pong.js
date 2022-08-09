@@ -254,9 +254,14 @@ const Pong = {
         //check if ball is about to hit the left wall  
         if (z.ballPos.x < 0) {
             //reverse x direction
-            z.ballSpeed.x *= -1 // *= Multyplying myself
-
-
+            //z.ballSpeed.x *= -1 // *= Multyplying myself
+            //when it hits the right wall 1:score incrases 
+            z.score[1] += 1
+            z.scoreTwo.html(z.score[1])
+            //2: stop the ball from moving
+            z.stopAnimation()
+            // 3: immediately start the round
+            z.restartRound()
         }
         // check if ball is about to hit the bottom 
         if (z.ballPos.y > z.config.stageDimensions.height - z.config.ballDimensions.height) {
