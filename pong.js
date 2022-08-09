@@ -60,8 +60,8 @@ const Pong = {
     },
 
     ballPos: {
-        x: 750,
-        y: 500
+        x: null,
+        y: null
     },
 
     ballSpeed: {
@@ -103,7 +103,7 @@ const Pong = {
         z.createBall()
         z.paddleControls()
         // Start ball movement
-        z.startBallMove()
+        z.startAnimation()
         z.createScore()
     },
 
@@ -128,6 +128,7 @@ const Pong = {
         z.ball.height(z.config.ballDimensions.height)
         // set ball styles
         z.ball.css(z.config.ballStyle)
+        z.resetBallPosition()
         // add ball to stage
         z.stage.append(z.ball);
 
@@ -183,7 +184,7 @@ const Pong = {
         z.scoreTwo.html(z.score[1])
     },
 
-    startBallMove: function () {
+    startAnimation: function () {
         // This calls next ball move repeadeatly, in this case its better to use than setTimeout
         const z = this
         z.ballInterval = setInterval(function () {
@@ -202,12 +203,27 @@ const Pong = {
         z.refreshPaddleTwoPositionOnScreen()
     },
 
-    stopBallMove: function () {
+    stopAnimation: function () {
         const z = this
 
         clearInterval(z.ballInterval)
 
 
+    },
+
+    restartRound: function(){
+        const z = this
+        //reset the ball position
+        z.resetBallPosition()
+        //restart the animation
+        z.startAnimation()
+    },
+
+    resetBallPosition: function(){
+        const z = this
+        z.ballPos.x = z.config.stageDimensions.width/2
+        z.ballPos.y = z.config.stageDimensions.height/2
+        //to do: pick a random angle
     },
 
     nextBallMove: function () {
@@ -226,8 +242,14 @@ const Pong = {
         //check if ball is about to hit the right wall
         if (z.ballPos.x > z.config.stageDimensions.width - z.config.ballDimensions.width) {
             //reverse x direction
-            z.ballSpeed.x *= -1 // *= Multyplying myself
-
+            //z.ballSpeed.x *= -1 // *= Multyplying myself
+            //when it hits the right wall 1:score incrases 
+            z.score[0] += 1 
+            z.scoreOne.html(z.score[0])
+            //2: stop the ball from moving
+            z.stopAnimation()
+            // 3: immediately start the round
+            z.restartRound()
         }
         //check if ball is about to hit the left wall  
         if (z.ballPos.x < 0) {
