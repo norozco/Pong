@@ -91,6 +91,13 @@ const Pong = {
 
     score: [0,0],
 
+    keysPressed: {
+    	W: false,
+    	S: false,
+    	UP: false,
+    	DOWN: false
+    },
+
     setupGame: function (containerElement) {
         const z = this
         z.gamediv = containerElement;
@@ -288,6 +295,7 @@ const Pong = {
 //console.log(z.ballPos.x > z.paddleTwoPosition.x - z.config.ballDimensions.width, z.ballPos.x, z.paddleTwoPosition.x, z.config.ballDimensions.width )
 
     },
+  //
 
     refreshBallPositionOnScreen: function () {
         const z = this
@@ -349,44 +357,34 @@ const Pong = {
         // Setup paddle one controls
 
         // If key up or down is pressed
-        // Note: keypress might make more sense, research later
         $(window).keydown(function (event) {
-            //alert(event.which)
             //s=83 w=87 (on keyboard)
             
-            //if you press up 
+            //if you press W key (up)
             if (event.which == 87) {
                 // Set velocity to UP
                 z.paddleOneSpeed.y = -1 * z.config.paddleOnePressingSpeed.y
-                //z.calculateNextPaddleOnePosition("up")
-                //z.refreshPaddleOnePositionOnScreen()
+                z.keysPressed.W = true
                 
             }
-            //If you press down
+            //If you press S key (down)
             if (event.which == 83) {
                 // Set velocity to DOWN
                 z.paddleOneSpeed.y = z.config.paddleOnePressingSpeed.y
-                //z.calculateNextPaddleOnePosition("down")
-                //z.refreshPaddleOnePositionOnScreen()
+                z.keysPressed.S = true
             }
 
+						//If you press UP key
             if (event.which == 38) {
                 // Set velocity to UP
                 z.paddleTwoSpeed.y = -1 * z.config.paddleTwoPressingSpeed.y
                 event.preventDefault()
-                //z.calculateNextPaddleTwoPosition("up")
-                // z.refreshPaddleTwoPositionOnScreen()
-
-                
             }
-            //If you press down
+            //If you press DOWN key
             if (event.which == 40) {
                 // Set velocity to DOWN
                 z.paddleTwoSpeed.y = z.config.paddleTwoPressingSpeed.y
                 event.preventDefault()
-                //z.calculateNextPaddleTwoPosition("down")
-                //z.refreshPaddleTwoPositionOnScreen()
-               
             }
             
 
@@ -395,11 +393,26 @@ const Pong = {
         // If either up or down key is let go
         $(window).keyup(function (event) {
             // Set Y movement to 0
+            /*
             if (event.which == 87 || event.which == 83) {
                 z.paddleOneSpeed.y = 0
             }
             if (event.which == 38 || event.which == 40) {
                 z.paddleTwoSpeed.y = 0
+            }
+            */
+            if (event.which == 87 && !z.keysPressed.S) {
+            		z.paddleOneSpeed.y = 0
+            }
+            if (event.which == 83 && !z.keysPressed.W) {
+            		z.paddleOneSpeed.y = 0
+            }
+
+            if (event.which == 87) {
+							z.keysPressed.W = false
+            }
+            if (event.which == 83) {
+							z.keysPressed.S = false
             }
 
         })
@@ -409,7 +422,6 @@ const Pong = {
     }
 
 }
-
 
 
 // Training stuff - can delete later
