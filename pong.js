@@ -26,7 +26,11 @@ const Pong = {
             background: "white",
             position: "absolute"
         },
-        paddleDimensions: {
+        paddleOneDimensions: {
+            width: 7,
+            height: 200
+        },
+        paddleTwoDimensions: {
             width: 7,
             height: 200
         },
@@ -127,8 +131,8 @@ const Pong = {
         z.paddleOne.css(z.config.paddleStyle)
         // add paddle to stage
         z.paddleOne.css(z.config.paddleOnePosition)
-        z.paddleOne.width(z.config.paddleDimensions.width)
-        z.paddleOne.height(z.config.paddleDimensions.height)
+        z.paddleOne.width(z.config.paddleOneDimensions.width)
+        z.paddleOne.height(z.config.paddleOneDimensions.height)
         z.stage.append(z.paddleOne);
         console.log('help')
     },
@@ -141,8 +145,8 @@ const Pong = {
         z.paddleTwo.css(z.config.paddleStyle)
         // add paddle to stage
         z.paddleTwo.css(z.config.paddleTwoPosition)
-        z.paddleTwo.width(z.config.paddleDimensions.width)
-        z.paddleTwo.height(z.config.paddleDimensions.height)
+        z.paddleTwo.width(z.config.paddleTwoDimensions.width)
+        z.paddleTwo.height(z.config.paddleTwoDimensions.height)
         z.stage.append(z.paddleTwo);
 
         console.log('help')
@@ -211,8 +215,6 @@ const Pong = {
         if (z.ballPos.y < 0) {
             //reverse y direction
             z.ballSpeed.y *= -1 // *= Multyplying myself
-
-
         }
     },
 
@@ -229,7 +231,7 @@ const Pong = {
         const nextPosition = z.paddleOnePosition.y + z.paddleOneSpeed.y
             //top of paddle hits top wall
         const paddleHitsTopWall = nextPosition < 0
-        const paddleHitsBottomWall = nextPosition > z.config.stageDimensions.height - z.config.paddleDimensions.height
+        const paddleHitsBottomWall = nextPosition > z.config.stageDimensions.height - z.config.paddleOneDimensions.height
             if(paddleHitsTopWall || paddleHitsBottomWall){
                 //do nothing
                     return 
@@ -249,7 +251,7 @@ const Pong = {
         const nextPosition = z.paddleTwoPosition.y + z.paddleTwoSpeed.y
         //top of paddle hits top wall
     const paddleHitsTopWall = nextPosition < 0
-    const paddleHitsBottomWall = nextPosition > z.config.stageDimensions.height - z.config.paddleDimensions.height
+    const paddleHitsBottomWall = nextPosition > z.config.stageDimensions.height - z.config.paddleTwoDimensions.height
         if(paddleHitsTopWall || paddleHitsBottomWall){
             //do nothing
                 return 
@@ -314,7 +316,7 @@ const Pong = {
                 //z.refreshPaddleTwoPositionOnScreen()
                 console.log("pressing down")
             }
-
+        
 
         })
 
@@ -358,3 +360,11 @@ console.log('new speed', speed)
 
 
 
+//bouncingOffPaddle: function(){
+   // const z = this
+   // z.ballPos.x += z.ballSpeed.x // += add to myself
+   // z.ballPos.y += z.ballSpeed.y
+    //make ball bounce off of paddle 2 
+   // if (z.ballPos.x > z.config.paddle)
+
+//}
