@@ -350,44 +350,34 @@ const Pong = {
         // Setup paddle one controls
 
         // If key up or down is pressed
-        // Note: keypress might make more sense, research later
         $(window).keydown(function (event) {
-            //alert(event.which)
             //s=83 w=87 (on keyboard)
             
-            //if you press up 
+            //if you press W key (up)
             if (event.which == 87) {
                 // Set velocity to UP
                 z.paddleOneSpeed.y = -1 * z.config.paddleOnePressingSpeed.y
-                //z.calculateNextPaddleOnePosition("up")
-                //z.refreshPaddleOnePositionOnScreen()
+                wIsPressed = true
                 
             }
-            //If you press down
+            //If you press S key (down)
             if (event.which == 83) {
                 // Set velocity to DOWN
                 z.paddleOneSpeed.y = z.config.paddleOnePressingSpeed.y
-                //z.calculateNextPaddleOnePosition("down")
-                //z.refreshPaddleOnePositionOnScreen()
+                sIsPressed = true
             }
 
+						//If you press UP key
             if (event.which == 38) {
                 // Set velocity to UP
                 z.paddleTwoSpeed.y = -1 * z.config.paddleTwoPressingSpeed.y
                 event.preventDefault()
-                //z.calculateNextPaddleTwoPosition("up")
-                // z.refreshPaddleTwoPositionOnScreen()
-
-                
             }
-            //If you press down
+            //If you press DOWN key
             if (event.which == 40) {
                 // Set velocity to DOWN
                 z.paddleTwoSpeed.y = z.config.paddleTwoPressingSpeed.y
                 event.preventDefault()
-                //z.calculateNextPaddleTwoPosition("down")
-                //z.refreshPaddleTwoPositionOnScreen()
-               
             }
             
 
@@ -396,11 +386,26 @@ const Pong = {
         // If either up or down key is let go
         $(window).keyup(function (event) {
             // Set Y movement to 0
+            /*
             if (event.which == 87 || event.which == 83) {
                 z.paddleOneSpeed.y = 0
             }
             if (event.which == 38 || event.which == 40) {
                 z.paddleTwoSpeed.y = 0
+            }
+            */
+            if (event.which == 87 && !sIsPressed) {
+            		z.paddleOneSpeed.y = 0
+            }
+            if (event.which == 83 && !wIsPressed) {
+            		z.paddleOneSpeed.y = 0
+            }
+
+            if (event.which == 87) {
+							wIsPressed = false
+            }
+            if (event.which == 83) {
+							sIsPressed = false
             }
 
         })
@@ -411,6 +416,8 @@ const Pong = {
 
 }
 
+wIsPressed = false
+sIsPressed = false
 
 
 // Training stuff - can delete later
