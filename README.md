@@ -37,10 +37,9 @@ Author: Nasser
 3. Optimize the calculate ball position
 
 ### TO DO 
-1. Fix the paddles switching direction lag
-3. Start the paddles in the middle of the screen
-4. Start the ball at a random angle and center of screen (almost)
-5. Setup scores and rounds (almost)
-6. Increase the ball speed every round
-7. Consolidate end of round logic
-8. Fix the bouncing on the outside of the paddles and the stage
+1. Setup rounds with names and a button to start it
+2. Increase the ball speed every round
+3. Consolidate end of round logic
+4. Fix the bouncing on the outside of the paddles and the stage (maybe)
+5. Change angle based on where the ball hits 
+6. Make this multiplayer (jesus take the wheel)

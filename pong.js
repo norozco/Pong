@@ -48,14 +48,18 @@ const Pong = {
         paddleOnePressingSpeed: {
             y: 3
         },
+
         paddleTwoPressingSpeed: {
             y: 3
         },
+
         scoreStyle: {
             color: "white",
             fontSize: "100px",
             fontFamily: "Garamond"
-        }
+        },
+
+        ballSpeed: 5
 
     },
 
@@ -65,8 +69,8 @@ const Pong = {
     },
 
     ballSpeed: {
-        x: 3,
-        y: 1
+        x: null,
+        y: null
     },
     paddleOnePosition: {
         x: null,
@@ -149,6 +153,7 @@ const Pong = {
         z.paddleOne.css(z.config.paddleStyle)
         // add paddle to stage
         z.resetPaddlePosition()
+        z.refreshPaddleOnePositionOnScreen()
         z.paddleOne.width(z.config.paddleOneDimensions.width)
         z.paddleOne.height(z.config.paddleOneDimensions.height)
         z.stage.append(z.paddleOne);
@@ -162,6 +167,7 @@ const Pong = {
         z.paddleTwo.css(z.config.paddleStyle)
         // add paddle to stage
         z.resetPaddlePosition()
+        z.refreshPaddleTwoPositionOnScreen()
         z.paddleTwo.width(z.config.paddleTwoDimensions.width)
         z.paddleTwo.height(z.config.paddleTwoDimensions.height)
         z.stage.append(z.paddleTwo);
@@ -225,6 +231,13 @@ const Pong = {
         z.ballPos.x = (z.config.stageDimensions.width - z.config.ballDimensions.width) / 2
         z.ballPos.y = (z.config.stageDimensions.height - z.config.ballDimensions.height) / 2
         //to do: pick a random angle
+        //angle=pickRandomNumber
+        /*ballXspeed = speed *cos(angle)
+          ballYspeed = speed *sin(angle)
+        */
+        const angle = Math.random() * 2 * Math.PI
+        z.ballSpeed.x = z.config.ballSpeed * Math.cos(angle)
+        z.ballSpeed.y = z.config.ballSpeed * Math.sin(angle)
     },
 
     resetPaddlePosition: function(){
@@ -296,7 +309,7 @@ const Pong = {
         //console.log(z.ballPos.x > z.paddleTwoPosition.x - z.config.ballDimensions.width, z.ballPos.x, z.paddleTwoPosition.x, z.config.ballDimensions.width )
 
     },
-    //
+
 
     refreshBallPositionOnScreen: function () {
         const z = this
@@ -323,7 +336,8 @@ const Pong = {
     refreshPaddleOnePositionOnScreen: function () {
         const z = this
         z.paddleOne.css({
-            top: z.paddleOnePosition.y + "px"
+            top: z.paddleOnePosition.y + "px",
+            left: z.paddleOnePosition.x + "px"
         })
     },
 
@@ -343,15 +357,11 @@ const Pong = {
     refreshPaddleTwoPositionOnScreen: function () {
         const z = this
         z.paddleTwo.css({
-            top: z.paddleTwoPosition.y + "px"
+            top: z.paddleTwoPosition.y + "px",
+            left: z.paddleTwoPosition.x + "px"
         })
     },
-    /**
-        TO DO:
-            Set up interval that actually moves the paddle
-            (Cuz the code below is only setting where it SHOULD be moving,
-            not where it actually is)
-    */
+
     paddleControls: function () {
         console.log("paddle Controls Not Working")
         const z = this
@@ -457,3 +467,8 @@ myArrayTwo = [1, "dog", "cat"]
 console.log(myArrayTwo[1])
 myArrayTwo[1] = "dolphin"
 console.log(myArrayTwo[1])
+console.log(Math.random())
+console.log(Math.random())
+console.log(Math.random())
+console.log(Math.random())
+console.log(Math.random())
