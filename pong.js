@@ -46,11 +46,11 @@ const Pong = {
         },
 
         paddleOnePressingSpeed: {
-            y: 3
+            y: 6
         },
 
         paddleTwoPressingSpeed: {
-            y: 3
+            y: 6
         },
 
         scoreStyle: {
