@@ -89,9 +89,13 @@ const Pong = {
 
         startScreenHotspotStyles: {
             position: "absolute",
-            height: "60vh",
-            width: "60vw",
-            background: "transparent"
+            top: "50%",
+            left: "50%",
+            height: "59vh",
+            width: "96vw",
+            background: "transparent",
+            transform: "translate(-50%, -50%)"
+            
         }
     },
 
@@ -166,22 +170,20 @@ const Pong = {
             z.startScreen.remove()
             z.restartRound()
         })
-        z.startScreen.hover(function () {
+        //We are gonna create an invisible rectangle that you can hover over
+        //create element
+        z.startScreenHotspot = $("<div>html</div>")
+        //Size of the picture
+        z.startScreenHotspot.css(z.config.startScreenHotspotStyles)
+        //makes it exist in the game
+        z.startScreen.append(z.startScreenHotspot)
+        z.startScreenHotspot.hover(function () {
             // this is when the mouse hovers over the image
             z.startScreen.css({ backgroundImage: 'url(./Pictures/startBig.svg)' })
         }, function () {
             //this is when the mouse exits the image    
             z.startScreen.css({ backgroundImage: 'url(./Pictures/start.svg)' })
         })
-        //We are gonna create an invisible rectangle that you can hover over
-
-
-        //create element
-        z.startScreenHotspot = $("<div>html</div>")
-        //Size of the picture
-        z.startScreenHotspot.css(z.config.startScreenHotspot)
-        //makes it exist in the game
-        z.startScreen.append(z.startScreenHotspot)
     },
 
     createPauseButton: function () {

@@ -42,4 +42,6 @@ Author: Nasser
 3. Fix the bouncing on the outside of the paddles and the stage (maybe)
 4. Change angle based on where the ball hits 
 5. Make game fit browsers 
-6. Make this multiplayer (jesus take the wheel)
+6. Make smaller images for the start screen
+7. Add sound and music
+8. Make this multiplayer (jesus take the wheel) 
