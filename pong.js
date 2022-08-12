@@ -71,6 +71,10 @@ const Pong = {
             height: "100px"
         },
 
+        playButtonStyle: {
+            width: "100px",
+            height: "100px"
+        },
     },
 
     ballPos: {
@@ -124,16 +128,30 @@ const Pong = {
         z.createBall()
         z.paddleControls()
         // Start ball movement
-        z.startAnimation()
         z.createScore()
         z.createPauseButton()
+        z.restartRound()
     },
 
     createPauseButton: function(){
         const z = this
         z.pauseButton = $("<img src=\"./Pictures/Play.svg\" />")
         z.pauseButton.css(z.config.pauseButtonStyle)
-        z.stage.append(z.pauseButton);
+        z.playButton = $("<img src=\"./Pictures/Pause.svg\" />")
+        z.playButton.css(z.config.playButtonStyle)
+        z.gamediv.append(z.playButton);
+        z.gamediv.append(z.pauseButton)
+
+        z.pauseButton.on("click", function(){
+            z.pauseButton.hide()
+            z.playButton.show() 
+            z.stopAnimation() 
+        });
+        z.playButton.on("click", function(){
+            z.pauseButton.show()
+            z.playButton.hide()
+            z.startAnimation()
+        })
     },
 
     createStage: function () {
@@ -216,7 +234,6 @@ const Pong = {
             z.nextPaddleMove()
 
         }, z.config.intervalSpeed)
-
     },
 
     nextPaddleMove: function () {
@@ -231,8 +248,6 @@ const Pong = {
         const z = this
 
         clearInterval(z.ballInterval)
-
-
     },
 
     restartRound: function () {
@@ -242,6 +257,8 @@ const Pong = {
         z.resetPaddlePosition()
         //restart the animation
         z.startAnimation()
+        z.pauseButton.show()
+        z.playButton.hide()
     },
 
     resetBallPosition: function () {
