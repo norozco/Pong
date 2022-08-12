@@ -64,7 +64,12 @@ const Pong = {
         ballSpeedIncreaseonHit: {
             x: 1.1,
             y: 1.1
-        }
+        },
+
+        pauseButton: {
+            width: 100,
+            height: 100
+        },
 
     },
 
@@ -121,7 +126,15 @@ const Pong = {
         // Start ball movement
         z.startAnimation()
         z.createScore()
+        z.createPauseButton()
     },
+
+    createPauseButton: function(){
+        const z = this
+        z.pauseButton = $("<img src=\"./Pictures/Play.svg\" />")
+        z.pauseButton.css(z.pauseButton)
+        z.stage.append(z.pauseButton);
+    },   
 
     createStage: function () {
         const z = this
@@ -139,7 +152,7 @@ const Pong = {
     createBall: function () {
         const z = this
         // create brand new ball
-        z.ball = $("<img src=\"./Ball.svg\" />")
+        z.ball = $("<img src=\"./Pictures/Ball.svg\" />")
         z.ball.width(z.config.ballDimensions.width)
         z.ball.height(z.config.ballDimensions.height)
         // set ball styles
