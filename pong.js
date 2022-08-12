@@ -116,6 +116,8 @@ const Pong = {
         DOWN: false
     },
 
+    gameIsPaused: false,
+    
     setupGame: function (containerElement) {
         const z = this
         z.gamediv = containerElement;
@@ -143,15 +145,41 @@ const Pong = {
         z.gamediv.append(z.pauseButton)
 
         z.pauseButton.on("click", function(){
-            z.pauseButton.hide()
-            z.playButton.show() 
-            z.stopAnimation() 
+            z.resumeGame()
         });
         z.playButton.on("click", function(){
-            z.pauseButton.show()
-            z.playButton.hide()
-            z.startAnimation()
+            z.pauseGame()
         })
+        $ (window) .on("keydown", function(event){
+            // space= 32
+            if(event.which == 32){
+                //if game is currently paused, we want to start play
+                if(z.gameIsPaused){
+                    //resume game
+                    z.resumeGame()
+                } else{
+                    //pause game
+                    z.pauseGame()
+                }
+            }
+        })
+
+    },
+
+    pauseGame: function(){
+        const z = this
+        z.pauseButton.show()
+        z.playButton.hide()
+        z.stopAnimation()
+        z.gameIsPaused = true
+    },
+
+    resumeGame: function(){
+        const z = this
+        z.pauseButton.hide()
+                    z.playButton.show()
+                    z.startAnimation() 
+                    z.gameIsPaused = false
     },
 
     createStage: function () {
