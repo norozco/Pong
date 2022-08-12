@@ -77,15 +77,22 @@ const Pong = {
             height: "100px"
         },
 
-        startGameButton:{
+        startGameButton: {
             height: "100vh",
             width: "100vw",
             position: "absolute",
             left: 0,
             top: 0,
             backgroundImage: 'url(./Pictures/start.svg)',
-						backgroundSize: 'cover'
+            backgroundSize: 'cover'
         },
+
+        startScreenHotspotStyles: {
+            position: "absolute",
+            height: "60vh",
+            width: "60vw",
+            background: "transparent"
+        }
     },
 
     ballPos: {
@@ -128,7 +135,7 @@ const Pong = {
     },
 
     gameIsPaused: false,
-    
+
     setupGame: function (containerElement) {
         const z = this
         z.gamediv = containerElement;
@@ -140,14 +147,13 @@ const Pong = {
         z.createPaddleTwo()
         z.createBall()
         z.paddleControls()
-        // Start ball movement
         z.createScore()
         z.createPauseButton()
         z.createStartScreen()
-        z.restartRound()
+        //z.restartRound()
     },
 
-    createStartScreen: function(){
+    createStartScreen: function () {
         const z = this
         //create element
         z.startScreen = $("<div></div>")
@@ -155,9 +161,30 @@ const Pong = {
         z.startScreen.css(z.config.startGameButton)
         //makes it exist in the game
         z.gamediv.append(z.startScreen)
+        //set the event handler's to start the game
+        z.startScreen.on("click", function () {
+            z.startScreen.remove()
+            z.restartRound()
+        })
+        z.startScreen.hover(function () {
+            // this is when the mouse hovers over the image
+            z.startScreen.css({ backgroundImage: 'url(./Pictures/startBig.svg)' })
+        }, function () {
+            //this is when the mouse exits the image    
+            z.startScreen.css({ backgroundImage: 'url(./Pictures/start.svg)' })
+        })
+        //We are gonna create an invisible rectangle that you can hover over
+
+
+        //create element
+        z.startScreenHotspot = $("<div>html</div>")
+        //Size of the picture
+        z.startScreenHotspot.css(z.config.startScreenHotspot)
+        //makes it exist in the game
+        z.startScreen.append(z.startScreenHotspot)
     },
 
-    createPauseButton: function(){
+    createPauseButton: function () {
         const z = this
         //create pause button and assign a handler to a variable
         z.pauseButton = $("<img src=\"./Pictures/Play.svg\" />")
@@ -167,20 +194,20 @@ const Pong = {
         z.gamediv.append(z.playButton);
         z.gamediv.append(z.pauseButton)
 
-        z.pauseButton.on("click", function(){
+        z.pauseButton.on("click", function () {
             z.resumeGame()
         });
-        z.playButton.on("click", function(){
+        z.playButton.on("click", function () {
             z.pauseGame()
         })
-        $ (window) .on("keydown", function(event){
+        $(window).on("keydown", function (event) {
             // space= 32
-            if(event.which == 32){
+            if (event.which == 32) {
                 //if game is currently paused, we want to start play
-                if(z.gameIsPaused){
+                if (z.gameIsPaused) {
                     //resume game
                     z.resumeGame()
-                } else{
+                } else {
                     //pause game
                     z.pauseGame()
                 }
@@ -189,7 +216,7 @@ const Pong = {
 
     },
 
-    pauseGame: function(){
+    pauseGame: function () {
         const z = this
         z.pauseButton.show()
         z.playButton.hide()
@@ -197,12 +224,12 @@ const Pong = {
         z.gameIsPaused = true
     },
 
-    resumeGame: function(){
+    resumeGame: function () {
         const z = this
         z.pauseButton.hide()
-                    z.playButton.show()
-                    z.startAnimation() 
-                    z.gameIsPaused = false
+        z.playButton.show()
+        z.startAnimation()
+        z.gameIsPaused = false
     },
 
     createStage: function () {
@@ -322,11 +349,11 @@ const Pong = {
         /*ballXspeed = speed *cos(angle)
           ballYspeed = speed *sin(angle)
         */
-       //we are narrowing down the random between the angles that we need in the left side
-        let angle = Math.random()* (Math.PI/2) + (3 * Math.PI/4)
+        //we are narrowing down the random between the angles that we need in the left side
+        let angle = Math.random() * (Math.PI / 2) + (3 * Math.PI / 4)
         console.log(angle)
         // Flip it on a 50% chance it will go the other way
-        if (Math.random() < .5){
+        if (Math.random() < .5) {
             angle -= Math.PI
             console.log("reverse",)
         }
@@ -335,7 +362,7 @@ const Pong = {
         z.ballSpeed.y = z.config.ballSpeed * Math.sin(angle)
     },
 
-    resetPaddlePosition: function(){
+    resetPaddlePosition: function () {
         const z = this
         z.paddleOnePosition.x = z.config.paddleOnePosition.x
         z.paddleOnePosition.y = (z.config.stageDimensions.height - z.config.paddleOneDimensions.height) / 2
@@ -407,13 +434,13 @@ const Pong = {
 
     },
 
-    ballGoesFaster: function (){
+    ballGoesFaster: function () {
         const z = this
         // ball speed x = bigger ball speed x
         z.ballSpeed.x *= z.config.ballSpeedIncreaseonHit.x
-        z.ballSpeed.y *= z.config.ballSpeedIncreaseonHit.y 
+        z.ballSpeed.y *= z.config.ballSpeedIncreaseonHit.y
     },
-    
+
 
     refreshBallPositionOnScreen: function () {
         const z = this
@@ -540,7 +567,7 @@ const Pong = {
             }
 
             if (event.which == 38) {
-                z.keysPressed.UP= false
+                z.keysPressed.UP = false
             }
             if (event.which == 40) {
                 z.keysPressed.DOWN = false
@@ -563,9 +590,9 @@ myNumber = 10
 console.log("multiplying by the number 2", myNumber * 2)
 console.log("multiplying by the string 2", myNumber * "abc")
 console.log("multiplying by null", myNumber * null)
-console.log("multiplying by an object", myNumber * {x:2})
+console.log("multiplying by an object", myNumber * { x: 2 })
 
 //for(startingNumber; if case "the condition" (if it returns true keep going, if it returns false STOP; what to do at the end of each loop)
-for(let I= 0; I<10; I += 1){
-    console.log("hi", Math.random()* Math.PI /2 + Math.PI/2)
+for (let I = 0; I < 10; I += 1) {
+    console.log("hi", Math.random() * Math.PI / 2 + Math.PI / 2)
 }
