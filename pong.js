@@ -59,7 +59,12 @@ const Pong = {
             fontFamily: "Garamond"
         },
 
-        ballSpeed: 5
+        ballSpeed: 5,
+
+        ballSpeedIncreaseonHit: {
+            x: 1.1,
+            y: 1.1
+        }
 
     },
 
@@ -298,11 +303,13 @@ const Pong = {
         //cond 1: if ball goes to the right of paddle two, cond 2: if ball is below the top of the paddle cond 3: ball is above the bottom of the paddle
         if (z.ballPos.x > z.paddleTwoPosition.x - z.config.ballDimensions.width && z.ballPos.y > z.paddleTwoPosition.y && z.ballPos.y < z.paddleTwoPosition.y + z.config.paddleTwoDimensions.height) {
             z.ballSpeed.x *= -1
+            z.ballGoesFaster()
             console.log("went past paddle :D")
         }
         //cond 1: if ball goes to the left of paddle one, cond 2: if ball is below the top of the paddle cond 3: ball is above the bottom of the paddle
         if (z.ballPos.x < z.paddleOnePosition.x + z.config.paddleOneDimensions.width && z.ballPos.y > z.paddleOnePosition.y && z.ballPos.y < z.paddleOnePosition.y + z.config.paddleOneDimensions.height) {
             z.ballSpeed.x *= -1
+            z.ballGoesFaster()
             console.log("went past paddle :D")
         }
         //console.log(z.ballPos.y > z.paddleTwoPosition.y, z.ballPos.y < z.paddleTwoPosition.y, z.ballPos.y,  z.paddleTwoPosition.y)
@@ -310,6 +317,13 @@ const Pong = {
 
     },
 
+    ballGoesFaster: function (){
+        const z = this
+        // ball speed x = bigger ball speed x
+        z.ballSpeed.x *= z.config.ballSpeedIncreaseonHit.x
+        z.ballSpeed.y *= z.config.ballSpeedIncreaseonHit.y 
+    },
+    
 
     refreshBallPositionOnScreen: function () {
         const z = this
@@ -455,20 +469,8 @@ function addnumbers(number1, number2) {
 
 }
 
-console.log('Hi its me')
-console.log(addnumbers(6, 25))
-let speed = 5
-console.log('hi speed=', speed)
-speed *= -2
-console.log('new speed', speed)
-
-myArray = [1, 2, 3, 4]
-myArrayTwo = [1, "dog", "cat"]
-console.log(myArrayTwo[1])
-myArrayTwo[1] = "dolphin"
-console.log(myArrayTwo[1])
-console.log(Math.random())
-console.log(Math.random())
-console.log(Math.random())
-console.log(Math.random())
-console.log(Math.random())
+myNumber = 10
+console.log("multiplying by the number 2", myNumber * 2)
+console.log("multiplying by the string 2", myNumber * "abc")
+console.log("multiplying by null", myNumber * null)
+console.log("multiplying by an object", myNumber * {x:2})
