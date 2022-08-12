@@ -82,7 +82,9 @@ const Pong = {
             width: "100vw",
             position: "absolute",
             left: 0,
-            top: 0
+            top: 0,
+            backgroundImage: 'url(./Pictures/start.svg)',
+						backgroundSize: 'cover'
         },
     },
 
@@ -148,7 +150,7 @@ const Pong = {
     createStartScreen: function(){
         const z = this
         //create element
-        z.startScreen = $("<img src=\"./Pictures/start.svg\" />")
+        z.startScreen = $("<div></div>")
         //Size of the picture
         z.startScreen.css(z.config.startGameButton)
         //makes it exist in the game
