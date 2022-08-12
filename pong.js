@@ -66,9 +66,9 @@ const Pong = {
             y: 1.1
         },
 
-        pauseButton: {
-            width: 100,
-            height: 100
+        pauseButtonStyle: {
+            width: "100px",
+            height: "100px"
         },
 
     },
@@ -132,9 +132,9 @@ const Pong = {
     createPauseButton: function(){
         const z = this
         z.pauseButton = $("<img src=\"./Pictures/Play.svg\" />")
-        z.pauseButton.css(z.pauseButton)
+        z.pauseButton.css(z.config.pauseButtonStyle)
         z.stage.append(z.pauseButton);
-    },   
+    },
 
     createStage: function () {
         const z = this
