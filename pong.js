@@ -15,7 +15,8 @@ const Pong = {
         gameStyle: {
             background: "black",
             paddle: "100px",
-            height: "100vh"
+            height: "100vh",
+            position: "relative"
         },
         ballStyle: {
             position: "absolute"
@@ -75,6 +76,14 @@ const Pong = {
             width: "100px",
             height: "100px"
         },
+
+        startGameButton:{
+            height: "100vh",
+            width: "100vw",
+            position: "absolute",
+            left: 0,
+            top: 0
+        },
     },
 
     ballPos: {
@@ -132,11 +141,23 @@ const Pong = {
         // Start ball movement
         z.createScore()
         z.createPauseButton()
+        z.createStartScreen()
         z.restartRound()
+    },
+
+    createStartScreen: function(){
+        const z = this
+        //create element
+        z.startScreen = $("<img src=\"./Pictures/start.svg\" />")
+        //Size of the picture
+        z.startScreen.css(z.config.startGameButton)
+        //makes it exist in the game
+        z.gamediv.append(z.startScreen)
     },
 
     createPauseButton: function(){
         const z = this
+        //create pause button and assign a handler to a variable
         z.pauseButton = $("<img src=\"./Pictures/Play.svg\" />")
         z.pauseButton.css(z.config.pauseButtonStyle)
         z.playButton = $("<img src=\"./Pictures/Pause.svg\" />")
@@ -257,6 +278,7 @@ const Pong = {
     startAnimation: function () {
         // This calls next ball move repeadeatly, in this case its better to use than setTimeout
         const z = this
+        z.stopAnimation()
         z.ballInterval = setInterval(function () {
             z.nextBallMove()
             z.nextPaddleMove()
