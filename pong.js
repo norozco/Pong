@@ -59,6 +59,15 @@ const Pong = {
             fontSize: "100px",
             fontFamily: "Garamond"
         },
+        nextRoundCounterStyle: {
+            color: "white",
+            fontSize: "281px",
+            fontFamily: "Garamond",
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)"
+        },
 
         ballSpeed: 5,
 
@@ -154,6 +163,7 @@ const Pong = {
         z.createScore()
         z.createPauseButton()
         z.createStartScreen()
+        z.createRoundCounter()
         //z.restartRound()
     },
 
@@ -306,6 +316,21 @@ const Pong = {
         z.scoreTwo.html(z.score[1])
     },
 
+    createRoundCounter: function(){
+        const z = this
+        //creating the round counter
+        z.roundCounter = $("<div></div>")
+        //assign styles to the round counter
+        z.roundCounter.css(z.config.nextRoundCounterStyle)
+        //add to the stage
+        z.stage.append(z.roundCounter)
+        //Put it where its supposed to go, we did this on styles in the config
+    },
+    startCountdown: function(){
+        let startnumber = 3
+        //we stopped here 
+    },
+
     startAnimation: function () {
         // This calls next ball move repeadeatly, in this case its better to use than setTimeout
         const z = this
@@ -434,7 +459,6 @@ const Pong = {
             z.ballGoesFaster()
             z.ballSpeed.x *= -1
             }
-        
         }
         //console.log(z.ballPos.y > z.paddleTwoPosition.y, z.ballPos.y < z.paddleTwoPosition.y, z.ballPos.y,  z.paddleTwoPosition.y)
         //console.log(z.ballPos.x > z.paddleTwoPosition.x - z.config.ballDimensions.width, z.ballPos.x, z.paddleTwoPosition.x, z.config.ballDimensions.width )
