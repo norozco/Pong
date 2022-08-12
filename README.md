@@ -38,10 +38,10 @@ Author: Nasser
 
 ### TO DO 
 1. Setup rounds with names and a button to start it
-2. Consolidate end of round logic
-3. Fix the bouncing on the outside of the paddles and the stage (maybe)
-4. Change angle based on where the ball hits 
-5. Make game fit browsers 
-6. Make smaller images for the start screen
-7. Add sound and music
-8. Make this multiplayer (jesus take the wheel) 
+1. Consolidate end of round logic
+1. Change angle based on where the ball hits 
+1. Make game fit browsers 
+1. Make smaller images for the start screen
+1. Add sound and music
+1. fix bug where ball goes straight through paddle when speed is too high
+1. Make this multiplayer (jesus take the wheel) 

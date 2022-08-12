@@ -421,15 +421,20 @@ const Pong = {
         }
         //cond 1: if ball goes to the right of paddle two, cond 2: if ball is below the top of the paddle cond 3: ball is above the bottom of the paddle
         if (z.ballPos.x > z.paddleTwoPosition.x - z.config.ballDimensions.width && z.ballPos.y > z.paddleTwoPosition.y && z.ballPos.y < z.paddleTwoPosition.y + z.config.paddleTwoDimensions.height) {
-            z.ballSpeed.x *= -1
-            z.ballGoesFaster()
-            console.log("went past paddle :D")
+            //if ball goes all the way past the paddle in the x direction then make it stop bouncing 
+            if (!(z.ballPos.x > z.paddleTwoPosition.x + z.config.paddleTwoDimensions.width)) {
+                z.ballGoesFaster()
+                z.ballSpeed.x *= -1
+                console.log(z.ballPos.x > z.paddleTwoPosition.x + z.paddleTwoPosition.width,z.ballPos.x, z.paddleTwoPosition.x, z.config.paddleTwoDimensions.width)
+            }
         }
         //cond 1: if ball goes to the left of paddle one, cond 2: if ball is below the top of the paddle cond 3: ball is above the bottom of the paddle
         if (z.ballPos.x < z.paddleOnePosition.x + z.config.paddleOneDimensions.width && z.ballPos.y > z.paddleOnePosition.y && z.ballPos.y < z.paddleOnePosition.y + z.config.paddleOneDimensions.height) {
-            z.ballSpeed.x *= -1
+            if(!(z.ballPos.x < z.config.paddleOnePosition.x - z.config.ballDimensions.width)) {
             z.ballGoesFaster()
-            console.log("went past paddle :D")
+            z.ballSpeed.x *= -1
+            }
+        
         }
         //console.log(z.ballPos.y > z.paddleTwoPosition.y, z.ballPos.y < z.paddleTwoPosition.y, z.ballPos.y,  z.paddleTwoPosition.y)
         //console.log(z.ballPos.x > z.paddleTwoPosition.x - z.config.ballDimensions.width, z.ballPos.x, z.paddleTwoPosition.x, z.config.ballDimensions.width )
