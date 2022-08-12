@@ -38,8 +38,8 @@ Author: Nasser
 
 ### TO DO 
 1. Setup rounds with names and a button to start it
-2. Increase the ball speed every round
-3. Consolidate end of round logic
-4. Fix the bouncing on the outside of the paddles and the stage (maybe)
-5. Change angle based on where the ball hits 
+2. Consolidate end of round logic
+3. Fix the bouncing on the outside of the paddles and the stage (maybe)
+4. Change angle based on where the ball hits 
+5. Make game fit browsers 
 6. Make this multiplayer (jesus take the wheel)

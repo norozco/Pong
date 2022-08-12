@@ -240,7 +240,15 @@ const Pong = {
         /*ballXspeed = speed *cos(angle)
           ballYspeed = speed *sin(angle)
         */
-        const angle = Math.random() * 2 * Math.PI
+       //we are narrowing down the random between the angles that we need in the left side
+        let angle = Math.random()* (Math.PI/2) + (3 * Math.PI/4)
+        console.log(angle)
+        // Flip it on a 50% chance it will go the other way
+        if (Math.random() < .5){
+            angle -= Math.PI
+            console.log("reverse",)
+        }
+        // Option 1: is if angle is bad reroll Option 2: Make your randomizer always pick a good spot
         z.ballSpeed.x = z.config.ballSpeed * Math.cos(angle)
         z.ballSpeed.y = z.config.ballSpeed * Math.sin(angle)
     },
@@ -474,3 +482,8 @@ console.log("multiplying by the number 2", myNumber * 2)
 console.log("multiplying by the string 2", myNumber * "abc")
 console.log("multiplying by null", myNumber * null)
 console.log("multiplying by an object", myNumber * {x:2})
+
+//for(startingNumber; if case "the condition" (if it returns true keep going, if it returns false STOP; what to do at the end of each loop)
+for(let I= 0; I<10; I += 1){
+    console.log("hi", Math.random()* Math.PI /2 + Math.PI/2)
+}
