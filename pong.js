@@ -23,6 +23,8 @@ const Pong = {
         },
         intervalSpeed: 13, // Leave this alone unless there is lag
 
+        countdownspeed: 780,
+
         paddleStyle: {
             background: "white",
             position: "absolute"
@@ -316,7 +318,7 @@ const Pong = {
         z.scoreTwo.html(z.score[1])
     },
 
-    createRoundCounter: function(){
+    createRoundCounter: function () {
         const z = this
         //creating the round counter
         z.roundCounter = $("<div></div>")
@@ -326,10 +328,29 @@ const Pong = {
         z.stage.append(z.roundCounter)
         //Put it where its supposed to go, we did this on styles in the config
     },
-    startCountdown: function(){
+    startCountdown: function (callMeWhenCountdownIsCompleted) {
+        const z = this
         let startnumber = 3
-        //we stopped here 
+        z.roundCounter.html(startnumber) 
+        z.roundCounter.show()
+        //wait one second 
+        z.coundownTimeout = setTimeout(function() {
+        //choose the number
+            z.roundCounter.html("2")
+            //wait one second
+            z.coundownTimeout = setTimeout(function() {
+                //choose the number
+                z.roundCounter.html("1")
+                z.coundownTimeout = setTimeout(function() {
+                    //choose the number
+                    console.log("countdown is complete")
+                    callMeWhenCountdownIsCompleted()
+                }, z.config.countdownspeed)
+            }, z.config.countdownspeed)
+        }, z.config.countdownspeed)
+        
     },
+    
 
     startAnimation: function () {
         // This calls next ball move repeadeatly, in this case its better to use than setTimeout
@@ -361,10 +382,16 @@ const Pong = {
         //reset the ball position
         z.resetBallPosition()
         z.resetPaddlePosition()
-        //restart the animation
-        z.startAnimation()
         z.pauseButton.show()
         z.playButton.hide()
+        //dont start animation until countdown is complete
+        z.stopAnimation()
+        z.startCountdown(function(){
+            z.startAnimation()
+            z.roundCounter.hide()
+            console.log("I called my callback")
+        })
+        //
     },
 
     resetBallPosition: function () {
@@ -450,14 +477,14 @@ const Pong = {
             if (!(z.ballPos.x > z.paddleTwoPosition.x + z.config.paddleTwoDimensions.width)) {
                 z.ballGoesFaster()
                 z.ballSpeed.x *= -1
-                console.log(z.ballPos.x > z.paddleTwoPosition.x + z.paddleTwoPosition.width,z.ballPos.x, z.paddleTwoPosition.x, z.config.paddleTwoDimensions.width)
+                console.log(z.ballPos.x > z.paddleTwoPosition.x + z.paddleTwoPosition.width, z.ballPos.x, z.paddleTwoPosition.x, z.config.paddleTwoDimensions.width)
             }
         }
         //cond 1: if ball goes to the left of paddle one, cond 2: if ball is below the top of the paddle cond 3: ball is above the bottom of the paddle
         if (z.ballPos.x < z.paddleOnePosition.x + z.config.paddleOneDimensions.width && z.ballPos.y > z.paddleOnePosition.y && z.ballPos.y < z.paddleOnePosition.y + z.config.paddleOneDimensions.height) {
-            if(!(z.ballPos.x < z.config.paddleOnePosition.x - z.config.ballDimensions.width)) {
-            z.ballGoesFaster()
-            z.ballSpeed.x *= -1
+            if (!(z.ballPos.x < z.config.paddleOnePosition.x - z.config.ballDimensions.width)) {
+                z.ballGoesFaster()
+                z.ballSpeed.x *= -1
             }
         }
         //console.log(z.ballPos.y > z.paddleTwoPosition.y, z.ballPos.y < z.paddleTwoPosition.y, z.ballPos.y,  z.paddleTwoPosition.y)
@@ -618,6 +645,7 @@ function addnumbers(number1, number2) {
 }
 
 myNumber = 10
+console.log("Calling numbers", addnumbers(5,12))
 console.log("multiplying by the number 2", myNumber * 2)
 console.log("multiplying by the string 2", myNumber * "abc")
 console.log("multiplying by null", myNumber * null)
