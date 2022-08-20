@@ -37,11 +37,12 @@ Author: Nasser
 3. Optimize the calculate ball position
 
 ### TO DO 
-1. Setup rounds with names and a button to start it
-1. Consolidate end of round logic
 1. Change angle based on where the ball hits 
 1. Make game fit browsers 
 1. Make smaller images for the start screen
 1. Add sound and music
-1. fix bug where ball goes straight through paddle when speed is too high
+1. Fix bug where ball goes straight through paddle when speed is too high
+1. Clean up the start countdown
+1. Deploy to internet
+    1. Audio might need adjustments
 1. Make this multiplayer (jesus take the wheel) 
