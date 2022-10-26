@@ -42,7 +42,7 @@ Author: Nasser
 1. Make smaller images for the start screen
 1. Add sound and music
 1. Fix bug where ball goes straight through paddle when speed is too high
-1. Clean up the start countdown
 1. Deploy to internet
     1. Audio might need adjustments
+1. Make settings
 1. Make this multiplayer (jesus take the wheel) 
